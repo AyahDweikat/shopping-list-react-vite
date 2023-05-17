@@ -1,82 +1,34 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-import React, { useState } from "react";
-import "./header.module.css";
+import React from "react";
 import {
   Box,
   Button,
-  Icon,
-  IconButton,
-  List,
-  ListItem,
 } from "@mui/material";
-import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import Cart from "./../Cart/Cart";
 
-function Header({ categoryArr, setChosenCategory, cart, setCart }) {
-  const [isOpen, setIsOpen] = React.useState(false);
-  const toggleDrawer = (open) => (event) => {
-    if (
-      event.type === "keydown" &&
-      (event.key === "Tab" || event.key === "Shift")
-    ) {
-      return;
-    }
-    setIsOpen(open);
-  };
+import BGImg from "./imgs/background.jpg";
+import ResponsiveAppBar from "./ResponsiveAppBar.jsx";
 
+function Header({ setChosenCategory, cart, setCart, chosenCategory }) {
   return (
-    <Box
-      sx={{
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-      }}
-    >
-      <h2>Categories</h2>
-      <List
+    <Box>
+      <Box sx={{display: "flex",justifyContent:"space-between" ,position:"fixed", top:'0', left:"0", backgroundColor: "secondary.dark", zIndex:"6", width: "100%" }}>
+        <ResponsiveAppBar chosenCategory={chosenCategory} setChosenCategory={setChosenCategory} cart={cart} setCart={setCart} />
+      </Box>
+      <Box
         sx={{
-          width: "70%",
-          display: "flex",
-          alignItems: "flex-end",
-          justifyContent: "flex-start",
-          color: "error.main",
-        }}
-      >
-        {categoryArr.map((category) => (
-          <ListItem key={category}>
-            <Button
-              sx={{
-                borderBottom: 2,
-                textAlign: "center",
-                color: "error.main",
-                borderRadius: 0,
-                px: "0px",
-              }}
-              onClick={() => setChosenCategory(category)}
-            >
-              {category}
-            </Button>
-          </ListItem>
-        ))}
-      </List>
-      <IconButton
-        onClick={toggleDrawer(true)}
-        sx={{
-          color: "common.black",
-          bgColor: "#9e9e9e",
-          borderRadius: 2,
-          my: "0px",
-        }}
-      >
-        <AddShoppingCartIcon sx={{ bgColor: "#9e9e9e" }} />
-      </IconButton>
-      <Cart
-        cart={cart}
-        setCart={setCart}
-        isOpen={isOpen}
-        toggleDrawer={toggleDrawer}
-      />
+          backgroundImage: `url(${BGImg})`,
+          height:"100vh",
+          position:"relative",
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          display:"flex", 
+          justifyContent:"center",
+          alignItems:"flex-end"
+        }}>
+          <Button href="#shopping" sx={{color: "secondary.main", position:"absolute", zIndex:"5", mb:"50px", backgroundColor:"info.dark", p:"8px"}}>Start Shopping Now</Button>
+      </Box>
     </Box>
   );
 }
