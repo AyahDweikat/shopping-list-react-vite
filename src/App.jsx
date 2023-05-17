@@ -2,34 +2,30 @@
 import { useState } from "react";
 import "./App.css";
 import * as React from "react";
-import { red } from "@mui/material/colors";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { ThemeProvider } from "@mui/material/styles";
 import Header from "./Components/Header/Header.jsx";
-import ListProducts from "./Components/List/List.jsx";
-
-const categoryArr = [
-  "electronics",
-  "jewelery",
-  "men's clothing",
-  "women's clothing",
-];
+import ListProducts from "./Components/ListProducts/ListProducts.jsx";
+import { categoryArr } from "./Components/utils.jsx";
+import theme from "./Components/theme.jsx";
 
 function App() {
   const [cart, setCart] = useState([]);
-  const [chosenCategory, setChosenCategory] = useState("");
+  const [chosenCategory, setChosenCategory] = useState(categoryArr[0]);
   return (
     <div>
-      <Header
-        cart={cart}
-        setCart={setCart}
-        categoryArr={categoryArr}
-        setChosenCategory={setChosenCategory}
-      />
-      <ListProducts
-        cart={cart}
-        setCart={setCart}
-        chosenCategory={chosenCategory}
-      />
+      <ThemeProvider theme={theme}>
+        <Header
+          cart={cart}
+          setCart={setCart}
+          chosenCategory={chosenCategory}
+          setChosenCategory={setChosenCategory}
+        />
+        <ListProducts
+          cart={cart}
+          setCart={setCart}
+          chosenCategory={chosenCategory}
+        />
+      </ThemeProvider>
     </div>
   );
 }
