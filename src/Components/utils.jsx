@@ -3,3 +3,11 @@ export default function fetchData(category){
     .then(res=>res.json())
     .then(json=> json)
 }
+
+
+export const categoryArr = [
+    "electronics",
+    "jewelery",
+    "men's clothing",
+    "women's clothing",
+  ];
