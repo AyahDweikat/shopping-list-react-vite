@@ -5,9 +5,18 @@ import * as React from "react";
 import { ThemeProvider } from "@mui/material/styles";
 import Header from "./Components/Header/Header.jsx";
 import ListProducts from "./Components/ListProducts/ListProducts.jsx";
-import { categoryArr } from "./Components/utils.jsx";
 import theme from "./Components/theme.jsx";
 import fetchData from "./Components/ApiUtils.js";
+import { GlobalContext } from "./Components/contextForCategory.jsx";
+
+
+export const categoryArr = [
+  "electronics",
+  "jewelery",
+  "men's clothing",
+  "women's clothing",
+];
+
 
 function App() {
   const [cart, setCart] = useState([]);
@@ -21,6 +30,7 @@ function App() {
   }, [chosenCategory]);
 
   return (
+    <GlobalContext.Provider value ={{categoryArr}}>
     <div>
       <ThemeProvider theme={theme}>
         <Header
@@ -37,6 +47,7 @@ function App() {
         />
       </ThemeProvider>
     </div>
+    </GlobalContext.Provider>
   );
 }
 

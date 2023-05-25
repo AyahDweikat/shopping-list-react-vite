@@ -11,13 +11,14 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import { categoryArr } from "../utils.jsx";
 import { Badge, Drawer } from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import Cart from "../Cart/Cart.jsx";
+import { GlobalContext } from "../contextForCategory.jsx";
 
 
 function ResponsiveAppBar({ setChosenCategory, chosenCategory, cart, setCart}) {
+  const {categoryArr} = React.useContext(GlobalContext);
   let itemCountInCart = cart.length;
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
   const toggleDrawer = (event, open) => {
