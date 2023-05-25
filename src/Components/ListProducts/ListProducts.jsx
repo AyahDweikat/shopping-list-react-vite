@@ -1,7 +1,8 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
-import fetchData from "../utils.jsx";
+
+
 import {
   Box,
   List,
@@ -15,10 +16,11 @@ import {
 } from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import fetchData from "../ApiUtils.js";
 
 function ListProducts({ chosenCategory, cart, setCart }) {
   const [products, setProducts] = useState([]);
-  function handlChooseCategoryeClick(product, id) {
+  function handleSelectProduct(product, id) {
     if (cart.includes(product)) setCart(cart.filter((item) => item.id !== id));
     else setCart([...cart, product]);
   }
@@ -49,8 +51,8 @@ function ListProducts({ chosenCategory, cart, setCart }) {
           gap: "20px",
         }}
       >
-        {products?.map((product, idx) => (
-          <Card key={idx} sx={{ maxWidth: 345 }}>
+        {products?.map(product => (
+          <Card key={product.id} sx={{ maxWidth: 345 }}>
             <Box sx={{ height: "180px", width: "130px", p: "8px", m: "auto" }}>
               <CardMedia
                 sx={{ height: "100%", width: "100%" }}
@@ -103,8 +105,8 @@ function ListProducts({ chosenCategory, cart, setCart }) {
               >
                 $ {product.price}
               </Typography>
-              <Button onClick={() => handlChooseCategoryeClick(product, product.id)}>
-                {cart.includes(product) ? (
+              <Button onClick={() => handleSelectProduct(product, product.id)}>
+                {cart.filter(cartItem=> cartItem.id == product.id).length ? (
                   <ShoppingCartIcon
                     sx={{
                       color: "primary.main",
