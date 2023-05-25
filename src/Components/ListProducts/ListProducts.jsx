@@ -16,19 +16,13 @@ import {
 } from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import fetchData from "../ApiUtils.js";
 
-function ListProducts({ chosenCategory, cart, setCart }) {
-  const [products, setProducts] = useState([]);
+function ListProducts({ cart, setCart, products }) {
   function handleSelectProduct(product, id) {
     if (cart.includes(product)) setCart(cart.filter((item) => item.id !== id));
     else setCart([...cart, product]);
   }
-  useEffect(() => {
-    if (chosenCategory) {
-      fetchData(chosenCategory).then((response) => setProducts(response));
-    }
-  }, [chosenCategory]);
+
   return (
     <Box
       id="shopping"
