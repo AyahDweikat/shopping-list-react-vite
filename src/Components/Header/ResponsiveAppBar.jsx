@@ -20,7 +20,7 @@ import Cart from "../Cart/Cart.jsx";
 function ResponsiveAppBar({ setChosenCategory, chosenCategory, cart, setCart}) {
   let itemCountInCart = cart.length;
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
-  const toggleDrawer = (open) => (event) => {
+  const toggleDrawer = (event, open) => {
     if (
       event.type === "keydown" &&
       (event.key === "Tab" || event.key === "Shift")
@@ -107,14 +107,14 @@ function ResponsiveAppBar({ setChosenCategory, chosenCategory, cart, setCart}) {
                 sx={{ alignSelf: "flex-end", mt: "15px", mr: "20px" }}
               >
                 <IconButton
-                  onClick={toggleDrawer(true)}
+                  onClick={(event)=> toggleDrawer(event, true)}
                 sx={{ p: 0 }}
               >
                 <AddShoppingCartIcon sx={{color:"white"}} />
               </IconButton>
               </Badge>
             </Tooltip>
-            <Drawer anchor={"right"} open={isDrawerOpen} onClose={toggleDrawer(false)}>
+            <Drawer anchor={"right"} open={isDrawerOpen} onClose={(event) => toggleDrawer(event, false)}>
                 <Cart cart={cart} setCart={setCart} sx={{ width: "50%" }} />
             </Drawer>
           </Box>
